@@ -1,0 +1,279 @@
+#: import Window kivy.core.window.Window
+
+<Card@MDCard+BackgroundColorBehavior>
+<OptionButton@MDRaisedButton>:
+    font_size: 25
+    bold: True
+    border: (2, 2, 2, 2)
+    size_hint_x: .8
+
+<ListItem>
+    markup: True
+
+#    IconLeftWidget:
+#        icon: 'account'
+
+<MDLabel>:
+    font_size: 60
+    bold: True
+    markup: True
+
+<RobotoButton@Button>:
+    font_size: 25
+    bold: True
+    border: (2, 2, 2, 2)
+#    on_release: app.choose_option(self.text, app.time)
+
+<BackgroundLayer@BoxLayout>:
+    orientation: 'vertical'
+    BoxLayout:
+        orientation: 'vertical'
+        canvas.before:
+            Color:
+                rgba: utils.get_color_from_hex('#28334AFF')
+            Rectangle:
+                pos: self.pos
+                size: self.size
+
+
+<MainApp>:
+    ScreenManager:
+        id: screen_manager
+
+        Screen:
+            name: 'login'
+
+            BackgroundLayer:
+                id: background
+
+            Card:
+                id: card
+                orientation: 'vertical'
+                size_hint: [0.8, 0.7]
+                pos_hint: {'center_x': .5, 'center_y': 0}
+                padding: [15, 0, 15, 0]
+                spacing: 14
+                elevation: 1000
+                md_bg_color: utils.get_color_from_hex('#28334AFF')
+
+                BoxLayout:
+                    orientation: 'vertical'
+                    spacing: 20
+
+                    MDLabel:
+                        text: '[b][size=60][color=#FBDE44FF]MARIST-PEDIA[/color][/size][/b]'
+                        text_size: self.size
+                        font_size: 40
+                        bold: True
+                        halign: 'center'
+                        valign: 'middle'
+                        markup: True
+                        size_hint_y: None
+                        height: self.texture_size[1]
+
+                    MDSeparator:
+                        height: '1dp'
+
+                    MDLabel:
+                        text: '[size=20]MARIST BROTHERS JUNIORATE[/size]'
+                        text_size: self.size
+                        bold: True
+                        markup: True
+                        halign: 'center'
+                        valign: 'middle'
+
+                    MDTextField:
+                        id: username_field
+                        mode: 'rectangle'
+                        hint_text: 'Username'
+                        text: 'Screen'
+                        size_hint_x: .7
+                        pos_hint: {'center_x': .5}
+                        color_mode: 'custom'
+                        line_color_focus: utils.get_color_from_hex('#FBDE44FF')
+                        disabled: True
+
+                    MDTextField:
+                        id: ip_field
+                        mode: 'rectangle'
+                        hint_text: 'IP Address'
+                        text: ''
+                        size_hint_x: .7
+                        pos_hint: {'center_x': .5}
+                        color_mode: 'custom'
+                        line_color_focus: utils.get_color_from_hex('#FBDE44FF')
+
+                    MDFillRoundFlatButton:
+                        text: '[size=18][b]Login[/b][/size]'
+                        size_hint_x: 0.7
+                        bold: True
+                        pos_hint: {'center_x': .5}
+                        height: 50
+                        markup: True
+                        md_bg_color: utils.get_color_from_hex('#F65058FF')
+                        on_release: app.login()
+
+                    MDFlatButton:
+
+        Screen:
+            name: 'Home_Page'
+
+            BackgroundLayer:
+                id: background
+
+            Image:
+                source: 'LOGO_DEMO_2.png'
+
+        Screen:
+            name: 'Quiz_Page'
+
+            BackgroundLayer:
+                id: background
+
+            BoxLayout:
+
+                BoxLayout:
+                    orientation: 'vertical'
+
+                    Widget:
+                        id: w_canvas
+                        canvas:
+                            Color:
+                                rgb: (0, 1, 0)
+                            Ellipse:
+                                group:'a'
+                                pos: 1140, 590
+                                size: 120,120
+                                angle_start: 0.0
+                                angle_end: 360
+                            Color:
+                                rgba: utils.get_color_from_hex('#28334AFF')
+                            Ellipse:
+                                group:'d'
+                                pos: 1160, 610
+                                size: 80,80
+                                angle_start: 0.0
+                                angle_end: 360
+                        Label:
+                            id : label
+                            font_size: 40
+                            text: "5"
+                            pos : 1150, 600
+
+                    MDLabel:
+                        id: question_display
+                        text: '[b][size=40][color=#FBDE44FF]Are You Ready?[/color][/size][/b]'
+                        bold: False
+                        halign: 'center'
+                        valign: 'center'
+
+                    MDLabel:
+                        # An empty label that pushes the questions up
+
+                    BoxLayout:
+                        id: options_layout_1
+                        height: 90
+                        orientation: 'horizontal'
+                        padding: 20
+                        spacing: 20
+                        size_hint: (1, None)
+
+                        RobotoButton:
+                            id: button_a
+                            background_color: (246, 0.31, 0.35, 0.45)
+                            text: 'A'
+                            on_press:
+
+                        RobotoButton:
+                            id: button_b
+                            text: 'B'
+                            background_color: (246, 0.31, 0.35, 0.45)
+                            on_press:
+
+                    BoxLayout:
+                        id: options_layout_2
+                        height: 90
+                        orientation: 'horizontal'
+                        padding: 20
+                        spacing: 20
+                        size_hint: (1, None)
+
+
+                        RobotoButton:
+                            id: button_c
+                            text: 'C'
+                            background_color: (246, 0.31, 0.35, 0.45)
+                            on_press:
+
+                        RobotoButton:
+                            id: button_d
+                            text: 'D'
+                            background_color: (246, 0.31, 0.35, 0.45)
+                            on_press:
+
+        Screen:
+            name: 'result_sheet'
+
+            BackgroundLayer:
+                id: background
+
+            BoxLayout:
+                orientation: 'vertical'
+                spacing: 20
+
+                MDLabel:
+                    id: round_num
+                    text: '[b][size=40][color=#FBDE44FF]Round[/color][/size][/b]'
+                    markup: True
+                    halign: 'center'
+                    pos_hint: {'center_y': 0}
+                    size_hint_y: 0.5
+                    size_hint_min_y: 0.5
+
+                MDSeparator:
+                    height: '5dp'
+
+                BoxLayout:
+                    spacing: 20
+                    orientation: 'horizontal'
+
+                    MDRoundFlatButton:
+                        id: correct_option
+                        text: '[size=18][color=F65058FF][b][/b][/color][/size]'
+                        size_hint_x: 0.7
+                        bold: True
+                        pos_hint: {'center_x': .5}
+                        markup: True
+
+                ScrollView:
+                    MDList:
+                        id: result_screen
+
+                Widget:
+        Screen:
+            name: 'final_result'
+
+            BackgroundLayer:
+                id: background
+
+            BoxLayout:
+                orientation: 'vertical'
+                spacing: 20
+
+                MDLabel:
+                    text: '[b][size=60][color=#FBDE44FF]FINAL RESULT[/color][/size][/b]'
+                    text_size: self.size
+                    font_size: 40
+                    bold: True
+                    halign: 'center'
+                    valign: 'middle'
+                    markup: True
+                    size_hint_y: None
+                    height: self.texture_size[1]
+
+                MDSeparator:
+                    height: '5dp'
+
+                ScrollView:
+                    MDList:
+                        id: final_result_sheet
